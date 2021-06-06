@@ -6,7 +6,39 @@ public class Main {
 
     public static void main(String[] args) {
 
+        System.out.println(reductionOperations(new int[]{5,1,3}));
+        System.out.println(reductionOperations(new int[]{1,1,1}));
+        System.out.println(reductionOperations(new int[]{1,1,2,2,3}));
+    }
 
+    public static int reductionOperations(int[] nums) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+        int preCount = 0;
+
+        for (int i = 0; i < nums.length; ++i) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+
+        Arrays.sort(nums);
+        int i = 0;
+        int j = nums.length - 1;
+        while(i < j) {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+            ++i;--j;
+        }
+
+        int count = 0;
+        for (i = 1; i < nums.length; ++i) {
+            if (nums[i] != nums[i - 1]) {
+                preCount = map.get(nums[i - 1]);
+                count += preCount;
+                map.put(nums[i], map.get(nums[i]) + preCount);
+            }
+        }
+        return count;
     }
 
     public boolean checkPalindromeFormation(String a, String b) {
