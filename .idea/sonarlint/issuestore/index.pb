@@ -5,3 +5,9 @@ Z
 *LeetCodeMay_2021/AmbiguousCoordinates.java,7/f/7fe9da3aac14651bc664d217604104422eafdaad
 O
 LeetCodeApr-2021/BrickWall.java,2/9/2951df6835047f5cc7338b95645afb6c89f48b76
+Ç
+RLeetCodeJun_2021/weekly_6_6_21/ReductionOperationsToMakeTheArrayElementsEqual.java,9/6/96321e756aa1f619bb4dbc7f7574417a6b5d0599
+^
+.LeetCodeJun_2021/MaximumPerformanceOfTeam.java,0/2/021bb29fc8fd13f581ad15ac1bb981cf144f8711
+Å
+QLeetCodeJun_2021/weekly_6_6_21/DetermineWhetherMatrixCanBeObtainedByRotation.java,9/f/9f433ef0ab5ad335d688ab03fa2b8b5c460f4f90
