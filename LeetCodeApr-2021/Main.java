@@ -5,8 +5,41 @@ public class Main {
 
 
     public static void main(String[] args) {
-            String name = "alex";
-        System.out.println(name.indexOf("alp"));
+
+        int[] arr = new int[]{4,5,3,4};
+        int i = 0;
+        int j = arr.length - 1;
+        int a = 0;
+        int b = 0;
+        while (i <= j) {
+             a += arr[i] > arr[j] ? arr[i++] : arr[j--];
+             b += arr[i] > arr[j] ? arr[i++] : arr[j--];
+        }
+        System.out.println(a > b);
+    }
+
+
+    public static int subarraysDivByK(int[] A, int K) {
+        Map<Integer, Integer> count = new HashMap<>();
+        count.put(0, 1);
+        int prefix = 0, res = 0;
+        for (int a : A) {
+            prefix = (prefix + a % K + K) % K;
+            res += count.getOrDefault(prefix, 0);
+            count.put(prefix, count.getOrDefault(prefix, 0) + 1);
+        }
+        return res;
+    }
+
+    public static String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0) return "";
+        String prefix = strs[0];
+        for (int i = 1; i < strs.length; i++)
+            while (strs[i].indexOf(prefix) != 0) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if (prefix.isEmpty()) return "";
+            }
+        return prefix;
     }
 
     public static int reductionOperations(int[] nums) {
