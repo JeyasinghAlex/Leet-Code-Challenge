@@ -8,6 +8,7 @@ public class Main {
 
         int[] arr = new int[]{4,5,3,4};
         int i = 0;
+
         int j = arr.length - 1;
         int a = 0;
         int b = 0;
