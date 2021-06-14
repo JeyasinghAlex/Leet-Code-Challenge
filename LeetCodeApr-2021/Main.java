@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         int[] arr = new int[]{4,5,3,4};
+
         int i = 0;
 
         int j = arr.length - 1;
