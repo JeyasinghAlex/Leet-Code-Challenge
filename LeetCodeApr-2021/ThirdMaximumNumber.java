@@ -1,8 +1,32 @@
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class ThirdMaximumNumber {
 
-    public int thirdMax(int[] nums) {
+    public static void main(String[] args) {
+        System.out.println(thirdMax_1(new int[]{-2147483648,1,1}));
+    }
+
+    public static int thirdMax_1(int[] nums) {
+
+        PriorityQueue<Integer> qu = new PriorityQueue<>();
+
+        for (int num : nums) {
+            if (!qu.contains(num)) {
+                qu.offer(num);
+
+                if (qu.size() > 3) {
+                    qu.poll();
+                }
+            }
+        }
+        if (qu.size() == 2) {
+            qu.poll();
+        }
+        return qu.peek();
+    }
+
+    public int thirdMax_2(int[] nums) {
 
         if (nums.length == 1) {
             return nums[0];
