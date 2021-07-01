@@ -10,7 +10,6 @@ public class BinaryTreePostorderTraversal {
     }
 
     private void dfs(TreeNode root) {
-
         if (root != null) {
             dfs(root.left);
             dfs(root.right);

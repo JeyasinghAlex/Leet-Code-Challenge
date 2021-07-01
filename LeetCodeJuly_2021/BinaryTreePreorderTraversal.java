@@ -10,7 +10,6 @@ public class BinaryTreePreorderTraversal {
     }
 
     private void dfs(TreeNode root) {
-
         if (root != null) {
             list.add(root.val);
             dfs(root.left);
