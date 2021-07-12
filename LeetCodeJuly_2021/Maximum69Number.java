@@ -23,24 +23,6 @@ public class Maximum69Number {
         int ans = 0;
         boolean flag = true;
 
-    public int maximum69Number_1 (int num) {
-
-        String s = num + "";
-        int ans = 0;
-        boolean flag = true;
-
-        for (char ch : s.toCharArray()) {
-
-            if (ch - '0' == 6 && flag) {
-                flag = false;
-                ans = (ans * 10) + 9;
-            } else {
-                ans = (ans * 10) + (ch - '0');
-            }
-        }
-        return ans;
-    }
-
         for (char ch : s.toCharArray()) {
 
             if (ch - '0' == 6 && flag) {
