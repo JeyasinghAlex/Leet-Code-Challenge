@@ -1,5 +1,3 @@
-package LeetCodeMay_2021;
-
 public class RemoveDuplicatesFromSortedArray_II {
 
 //    Remove Duplicates from Sorted Array(no duplicates) :
