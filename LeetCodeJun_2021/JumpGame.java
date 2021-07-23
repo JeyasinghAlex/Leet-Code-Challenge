@@ -1,5 +1,3 @@
-package LeetCodeJun_2021;
-
 public class JumpGame {
 
     public boolean canJump(int[] nums) {

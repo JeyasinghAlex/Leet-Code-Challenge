@@ -1,5 +1,3 @@
-package LeetCodeMay_2021;
-
 import java.util.Arrays;
 
 public class JumpGame_II {
@@ -17,5 +15,22 @@ public class JumpGame_II {
             }
         }
         return jump[nums.length - 1];
+    }
+
+    public int jump_1(int[] nums) {
+
+        int step = 0;
+        int curr = 0;
+        int ans = 0;
+        for (int i = 0; i < nums.length; ++i) {
+
+            if (i > curr) {
+                ++ans;
+                curr = step;
+            }
+
+            step = Math.max(step, nums[i] + i);
+        }
+        return ans;
     }
 }
