@@ -3,6 +3,13 @@ import java.util.Map;
 
 public class CombinationSum_IV {
 
+    public static void main(String[] args) {
+        int[] nums = {1,2,3};
+        int target = 4;
+        int[] memo = new int[target + 1];
+        memo[0] = 1;
+        System.out.println(new CombinationSum_IV().usedMemoization(nums, memo, target));
+    }
     /* Using DP */
 
     public int usedDP(int[] nums, int target) {
