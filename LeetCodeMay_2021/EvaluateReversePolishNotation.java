@@ -1,6 +1,3 @@
-package LeetCodeMay_2021;
-
-import java.util.List;
 import java.util.Stack;
 
 public class EvaluateReversePolishNotation {
