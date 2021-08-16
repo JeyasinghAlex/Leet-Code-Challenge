@@ -1,25 +1,296 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
 
+    public static void main(String[] args) throws XPathExpressionException, ParserConfigurationException, IOException, TransformerException, SAXException {
 
-
-    public static void main(String[] args) {
-
-        int[] arr = new int[]{4,5,3,4};
-
-        int i = 0;
-
-        int j = arr.length - 1;
-        int a = 0;
-        int b = 0;
-        while (i <= j) {
-             a += arr[i] > arr[j] ? arr[i++] : arr[j--];
-             b += arr[i] > arr[j] ? arr[i++] : arr[j--];
-        }
-        System.out.println(a > b);
+        String s = "1234567";
+        System.out.println(s.substring(2));
     }
 
+    public static void xmlWritter() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, TransformerException {
+
+        String inputFile = "/home/jeya-zt501/AlexSparrow/security-api.xml";
+        String outputFile = "/home/jeya-zt501/AlexSparrow/test_1-api.xml";
+
+// 1- Build the doc from the XML file
+        Document doc = DocumentBuilderFactory.newInstance()
+                .newDocumentBuilder().parse(inputFile);
+
+// 2- Locate the node(s) with xpath
+        XPath xpath = XPathFactory.newInstance().newXPath();
+        NodeList nodes = (NodeList)xpath.evaluate("//*[contains(@org-oauthscope, 'crmapi')]",
+                doc, XPathConstants.NODESET);
+
+// 3- Make the change on the selected nodes
+        System.out.println(nodes.getLength());
+        for (int idx = 0; idx < nodes.getLength(); idx++) {
+            Node org_oauthscope = nodes.item(idx).getAttributes().getNamedItem("org-oauthscope");
+            Node oauthscope = nodes.item(idx).getAttributes().getNamedItem("oauthscope");
+            if (org_oauthscope != null && oauthscope != null) {
+                String org_oauthscope_val = org_oauthscope.getNodeValue();
+                String oauthscope_val = oauthscope.getNodeValue();
+                System.out.println(org_oauthscope_val + " ->" + oauthscope_val);
+                org_oauthscope.setNodeValue(org_oauthscope_val.replaceAll("crmapi", org_oauthscope_val + "," + oauthscope_val));
+            }
+        }
+
+// 4- Save the result to a new XML doc
+        Transformer xformer = TransformerFactory.newInstance().newTransformer();
+        xformer.transform(new DOMSource(doc), new StreamResult(new File(outputFile)));
+    }
+    public static void xmlParser()
+    {
+        try
+        {
+            File file = new File("/home/jeya-zt501/AlexSparrow/security-api_1.xml");
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(file);
+            doc.getDocumentElement().normalize();
+//            System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
+            NodeList nodeList = doc.getElementsByTagName("url");
+            for (int itr = 0; itr < nodeList.getLength(); itr++)
+            {
+                Node node = nodeList.item(itr);
+//                System.out.println("\nNode Name :" + node.getNodeName());
+                if (node.getNodeType() == Node.ELEMENT_NODE)
+                {
+                    Element eElement = (Element) node;
+                    if (!eElement.getAttribute("org-oauthscope").isEmpty() && !eElement.getAttribute("oauthscope").isEmpty()) {
+                        String argOauthScope = eElement.getAttribute("org-oauthscope");
+                        String userOauthScope = eElement.getAttribute("oauthscope");
+                        eElement.setAttribute("org-oauthscope", argOauthScope + "," + userOauthScope);
+                        System.out.println(eElement.getAttribute("org-oauthscope") + " -> " + eElement.getAttribute("oauthscope"));;
+                    }
+                }
+            }
+//            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+//            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+////            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+////            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "5");
+//            DOMSource source = new DOMSource(doc);
+//            StreamResult result = new StreamResult("/home/jeya-zt501/AlexSparrow/security-api_1.xml");
+//            transformer.transform(source, result);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private static void save(Document doc) throws TransformerException {
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+//            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+//            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "5");
+        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult("/home/jeya-zt501/AlexSparrow/security-api_1.xml");
+        transformer.transform(source, result);
+    }
+
+    public static int countPrimes(int n) {
+
+        int[] prime = new int[n + 1];
+
+        for (int i = 0; i <= n; ++i) {
+            prime[i] = i;
+        }
+
+        for (int i = 2; i <= n; ++i) {
+
+            for (int j = i << 1; j <= n; j += i) {
+                prime[j] = i;
+            }
+        }
+
+        int count = 0;
+        for (int i = 2; i <= n; ++i) {
+            if (prime[i] == i) {
+                ++count;
+            }
+        }
+        return count;
+    }
+
+    public static List<Integer> findDisappearedNumbers(int[] nums) {
+
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i<= nums.length; ++i) {
+            list.add(i);
+        }
+
+        for (int i = 0; i < nums.length; ++i) {
+            int index = list.indexOf(nums[i]);
+            list.remove(index);
+        }
+
+        return list;
+    }
+
+    public static boolean isLongPressedName(String name, String typed) {
+        Stack<Character> st = new Stack<>();
+
+        for (char ch : typed.toCharArray()) {
+            st.push(ch);
+        }
+
+        for (int i = name.length() - 1; i >= 0; --i) {
+            char ch = name.charAt(i);
+            if (ch != st.peek()) {
+                return false;
+            }
+
+            while (!st.isEmpty() && ch == st.peek()) {
+                st.pop();
+            }
+        }
+        return true;
+    }
+
+    public static int[] smallerNumbersThanCurrent(int[] nums) {
+
+        int[] cnt = new int[101];
+        for (int i = 0; i < nums.length; ++i) {
+            cnt[nums[i]]++;
+        }
+
+        int sum = 0;
+        for (int i = 0; i < 101; ++i) {
+            if (cnt[i] != 0) {
+                int temp = cnt[i];
+                cnt[i] = sum;
+                sum += temp;
+            }
+        }
+
+        int[] res = new int[nums.length];
+        for (int i = 0; i < nums.length; ++i) {
+            res[i] = cnt[nums[i]];
+        }
+
+        return res;
+    }
+
+    public static int heightChecker(int[] heights) {
+        int[] heightToFreq = new int[101];
+
+        for (int height : heights) {
+            heightToFreq[height]++;
+        }
+        int result = 0;
+        int curHeight = 0;
+        for (int i = 0; i < heights.length; i++) {
+            while (heightToFreq[curHeight] == 0) {
+                curHeight++;
+            }
+
+            if (curHeight != heights[i]) {
+                result++;
+            }
+            heightToFreq[curHeight]--;
+        }
+        return result;
+    }
+
+    public static int[] relativeSortArray(int[] arr1, int[] arr2) {
+
+        List<Integer> list = new ArrayList<>();
+        for (int a : arr1) {
+            list.add(a);
+        }
+        int idx = 0;
+        for (int a : arr2) {
+            while (list.contains(a)) {
+                int index = list.indexOf(a);
+                arr1[idx++] = list.remove(index);
+            }
+        }
+        while (!list.isEmpty()) {
+            arr1[idx++] = list.remove(0);
+        }
+        return arr1;
+    }
+
+    public static char slowestKey(int[] releaseTimes, String keysPressed) {
+
+        int len = releaseTimes.length;
+        int[] time = new int[26];
+        int max = Integer.MIN_VALUE;
+        int prevTime = 0;
+        char ch = 'A';
+        for (int i = 0; i < len; ++i) {
+            int t = releaseTimes[i] - prevTime;
+            prevTime = releaseTimes[i];
+            if(t > time[keysPressed.charAt(i) - 'a']) {
+                time[keysPressed.charAt(i) - 'a'] = t;
+            }
+
+            max = Math.max(t, max);
+            if (t > max || t == max && keysPressed.charAt(i) > ch) {
+                ch = keysPressed.charAt(i);
+            }
+        }
+
+        return ch;
+    }
+
+    public static int specialArray(int[] nums) {
+        int[] count = new int[1001];
+        for (int num : nums) {
+            count[num]++;
+        }
+        int number = nums.length;
+        // the size of nums array is 100 at most
+        for (int i = 0; i <= 100; i++) {
+            if (number == i) {
+                return i;
+            }
+            number -= count[i];
+        }
+        return -1;
+    }
+
+    public static int minOperations(int[] nums, int x) {
+        int sum = Arrays.stream(nums).sum() - x;
+        if(sum < 0) return -1;
+        if(sum == 0) return nums.length;
+        int start = 0, cur = 0, len = -1;
+        for(int end = 0; end < nums.length; end++)
+        {
+            cur += nums[end];
+            while (cur >= sum)
+            {
+                if (cur == sum)
+                    len = Math.max(len, end - start + 1);
+                cur -= nums[start++];
+            }
+        }
+
+        return len == -1 ? -1 : nums.length - len;
+    }
 
     public static int subarraysDivByK(int[] A, int K) {
         Map<Integer, Integer> count = new HashMap<>();
