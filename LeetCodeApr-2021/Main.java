@@ -26,8 +26,8 @@ public class Main {
 
     public static void main(String[] args) throws XPathExpressionException, ParserConfigurationException, IOException, TransformerException, SAXException {
 
-        String s = "1234567";
-        System.out.println(s.substring(2));
+        StringBuilder sb  = new StringBuilder();
+        System.out.println((char) ('b' - 32));
     }
 
     public static void xmlWritter() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, TransformerException {
