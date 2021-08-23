@@ -1,45 +1,45 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class FindAllAnagramsInString {
 
-    public static void main(String[] args) {
-        System.out.println(new FindAllAnagramsInString().findAnagrams("cbaebabacd", "abc"));
+    public List<Integer> findAnagrams(String s, String p) {
+
+        int window = p.length();
+        int len = s.length();
+        List<Integer> ans = new ArrayList<>();
+        if (window > len) {
+            return ans;
+        }
+
+        int[] base = new int[26];
+        int[] compare = new int[26];
+        int right = 0;
+        int left = 0;
+        for (int i = 0; i < p.length(); ++i) {
+            base[p.charAt(right) - 'a']++;
+            compare[s.charAt(right++) - 'a']++;
+        }
+
+        for (int i = right; i <= len; ++i) {
+            if (check(base, compare)){
+                ans.add(left);
+            }
+            if (i < len) {
+                compare[s.charAt(left++) - 'a']--;
+                compare[s.charAt(i) - 'a']++;
+            }
+        }
+        return ans;
     }
 
-    public List<Integer> findAnagrams(String s, String p) {
-        List<Integer> list = new ArrayList<>();
-        if (s == null || s.length() == 0 || p == null || p.length() == 0) return list;
+    private boolean check(int[] base, int[] compare) {
 
-        int[] hash = new int[26];
-
-        for (char c : p.toCharArray()) {
-            hash[c - 'a']++;
-        }
-
-        int left = 0, right = 0, count = p.length();
-
-        while (right < s.length()) {
-
-            if (hash[s.charAt(right) - 'a'] >= 1) {
-                count--;
-            }
-            hash[s.charAt(right) - 'a']--;
-            right++;
-
-            if (count == 0) {
-                list.add(left);
-            }
-            if (right - left == p.length() ) {
-
-                if (hash[s.charAt(left) - 'a'] >= 0) {
-                    count++;
-                }
-                hash[s.charAt(left) - 'a']++;
-                left++;
+        for (int i = 0; i < base.length; ++i) {
+            if (base[i] != compare[i]) {
+                return false;
             }
         }
-        return list;
+        return true;
     }
 
     public List<Integer> findAnagrams_1(String s, String p) {
