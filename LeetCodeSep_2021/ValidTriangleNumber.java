@@ -2,11 +2,6 @@ import java.util.Arrays;
 
 public class ValidTriangleNumber {
 
-    public static void main(String[] args) {
-        int[] arr = {2,2,3,4};
-        System.out.println(new ValidTriangleNumber().triangleNumber(arr));
-    }
-
     public int triangleNumber(int[] nums) {
 
         if (nums.length < 3) {
