@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class CoinChange {
 
     public int coinChange(int[] coins, int amount) {
@@ -15,7 +13,7 @@ public class CoinChange {
                     dp[i][j] = (int) 1e5;
                 } else if (coins[i - 1] > j) {
                     dp[i][j] = dp[i - 1][j];
-                }else {
+                } else {
                     dp[i][j] = Math.min(dp[i - 1][j], 1 + dp[i][j - coins[i - 1]]);
                 }
             }

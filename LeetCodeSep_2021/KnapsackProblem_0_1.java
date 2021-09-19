@@ -1,21 +1,4 @@
-import java.util.Arrays;
-
 public class KnapsackProblem_0_1 {
-
-    public static void main(String[] args) {
-
-        int[] profit = {1, 2, 5, 6};
-        int[] weight = {2, 3, 4, 5};
-        int[][] memo = new int[4 + 1][8 + 1];
-        for (int i = 0; i < memo.length; ++i){
-            for (int j = 0; j < memo[0].length; ++j) {
-                memo[i][j] = -1;
-            }
-        }
-
-        System.out.println(new KnapsackProblem_0_1().recursive(weight, profit, profit.length    , 8));
-//        System.out.println(Arrays.deepToString(memo));
-    }
 
     public int dp(int[] weight, int[] profit, int w) {
 
