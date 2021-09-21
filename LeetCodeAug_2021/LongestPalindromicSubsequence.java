@@ -26,4 +26,41 @@ public class LongestPalindromicSubsequence {
         }
         return max;
     }
+
+    private int memoization(String s, int l, int r, int[][] memo) {
+
+        if (l == r) {
+            return 1;
+        }
+
+        if (l > r) {
+            return 0;
+        }
+
+        if (memo[l][r] != 0) {
+            return memo[l][r];
+        }
+
+        if (s.charAt(l) == s.charAt(r)) {
+            return 2 + memoization(s, l + 1, r - 1, memo);
+        }
+        memo[l][r] = Math.max(memoization(s, l + 1, r, memo), memoization(s, l, r - 1, memo));
+        return memo[l][r];
+    }
+
+    private int recursive(String s, int l, int r) {
+
+        if (l == r) {
+            return 1;
+        }
+        if (l > r) {
+            return 0;
+        }
+
+        if (s.charAt(l) == s.charAt(r)) {
+            return 2 + recursive(s, l + 1, r - 1);
+        }
+
+        return Math.max(recursive(s, l + 1, r), recursive(s, l, r - 1));
+    }
 }
