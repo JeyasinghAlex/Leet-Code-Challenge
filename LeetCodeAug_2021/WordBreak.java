@@ -1,5 +1,6 @@
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class WordBreak {
@@ -81,6 +82,60 @@ public class WordBreak {
             }
             node.setEnd();
         }
+    }
+
+    public boolean dp(String s, List<String> wordDict) {
+
+        int n = s.length();
+        boolean[][] dp = new boolean[n + 1][n + 1];
+        for (int i = 0; i < n; ++i) {
+            if (wordDict.contains(s.substring(i, i + 1))) {
+                dp[i + 1][i + 1] = true;
+            } else {
+                dp[i + 1][i + 1] = false;
+            }
+        }
+
+        for (int i = 1; i < n; ++i) {
+            for (int j = 1; j <= n - i; ++j) {
+
+                int k = j + i;
+                if (wordDict.contains(s.substring(j - 1, k))) {
+                    dp[j][k] = true;
+                } else {
+                    for (int l = j; l < k; ++l) {
+                        dp[j][k] = dp[j][l] && dp[l + 1][k];
+
+                        if (dp[j][k]) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return dp[1][n];
+    }
+
+    public boolean memoization(int index, String s, List<String> dict, Map<String, Boolean> map) {
+
+        if (dict.contains(s) || index == s.length()) {
+            return true;
+        }
+
+        if (map.get(s) != null) {
+            return map.get(s);
+        }
+
+        for (int i = index; i < s.length(); ++i) {
+
+            String substr = s.substring(index, i + 1);
+            if (dict.contains(substr) && memoization(0, s.substring(i + 1), dict, map)) {
+                map.put(substr, true);
+                return true;
+            }
+        }
+        map.put(s, false);
+        return false;
     }
 
     public boolean wordBreak_1(String s, List<String> wordDict) {
