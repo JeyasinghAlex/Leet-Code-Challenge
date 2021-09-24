@@ -1,5 +1,6 @@
 public class UniqueBinarySearchTrees {
 
+    //catalan number:
     public int numTrees(int n) {
 
         if (n <= 1) {
