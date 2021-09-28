@@ -1,10 +1,5 @@
 public class MaximumSumIncreasingSubSequence {
 
-    public static void main(String[] args) {
-        int[] arr = {1, 100, 3, 2, 6};
-        System.out.println(new MaximumSumIncreasingSubSequence().maximumSumIncreasingSubSequence(arr));
-    }
-
     public int maximumSumIncreasingSubSequence(int[] nums) {
 
         int n = nums.length;
