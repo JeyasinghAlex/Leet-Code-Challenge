@@ -6,11 +6,11 @@ public class DetectCycleInDirectedGraph {
     public boolean isCyclic(int v, ArrayList<ArrayList<Integer>> adj) {
 
         boolean[] visited = new boolean[v];
-        boolean[] back = new boolean[v];
+        boolean[] dfsvis = new boolean[v];
         for (int i = 0; i < v; ++i) {
 
             if (!visited[i]) {
-                boolean flag = isCyclicUtil(visited, back, i, adj);
+                boolean  flag = dfs(i, adj, visited, dfsvis);
                 if (flag) {
                     return true;
                 }
@@ -19,24 +19,27 @@ public class DetectCycleInDirectedGraph {
         return false;
     }
 
-    private boolean isCyclicUtil(boolean[] visited, boolean[] back, int curr, List<ArrayList<Integer>> adj) {
+    private boolean dfs(int curr, List<ArrayList<Integer>> adj, boolean[] visited, boolean[] dfsvis) {
+
+        if (dfsvis[curr]) {
+            return true;
+        }
 
         visited[curr] = true;
-        back[curr] = true;
+        dfsvis[curr] = true;
 
-        List<Integer> list = adj.get(curr);
-        for (int i : list) {
-
-            if (!visited[i] && !back[i]) {
-                boolean flag = isCyclicUtil(visited, back, i, adj);
+        for (int i = 0; i < adj.get(curr).size(); ++i) {
+            int a = adj.get(curr).get(i);
+            if (!visited[a]) {
+                boolean flag = dfs(a, adj, visited, dfsvis);
                 if (flag) {
                     return true;
                 }
-            } else if (back[i]) {
+            } else if (dfsvis[a]) {
                 return true;
             }
         }
-        back[curr] = false;
+        dfsvis[curr] = false;
         return false;
     }
 }
