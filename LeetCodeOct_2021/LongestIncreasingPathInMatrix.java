@@ -22,7 +22,6 @@ public class LongestIncreasingPathInMatrix {
         if (dp[i][j] != 0) {
             return dp[i][j];
         }
-
         int max = 1;
         for (int[] d : dir) {
             int x = i + d[0];
