@@ -31,6 +31,8 @@ public class DisjointSet {
     }
 
     private void union(int a, int b, int[] parent) {
+        a = find(a, parent);
+        b = find(b, parent);
         parent[a] = b;
     }
 
