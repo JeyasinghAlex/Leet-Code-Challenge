@@ -17,7 +17,7 @@ public class DisjointSetUnionByRankAndPathCompression {
         }
 
         for (int i = 0; i < n; ++i) {
-            dsuf[i].parent = -1;
+            dsuf[i].parent = i;
             dsuf[i].rank = 0;
         }
 
@@ -55,7 +55,7 @@ public class DisjointSetUnionByRankAndPathCompression {
 
     private int find(int v) {
 
-        if (dsuf[v].parent == -1) {
+        if (dsuf[v].parent == v) {
             return v;
         }
         return dsuf[v].parent = find(dsuf[v].parent);
