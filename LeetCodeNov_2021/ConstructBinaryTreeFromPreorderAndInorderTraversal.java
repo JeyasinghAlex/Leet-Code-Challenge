@@ -1,6 +1,34 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
 
+    private Map<Integer, Integer> map;
+    private int preOrderIndex;
+
     public TreeNode buildTree(int[] preorder, int[] inorder) {
+        this.map = new HashMap<>();
+        this.preOrderIndex = 0;
+        for (int i = 0; i < inorder.length; ++i) {
+            map.put(inorder[i], i);
+        }
+        return helper(preorder, 0, preorder.length - 1);
+    }
+
+    private TreeNode helper(int[] preorder, int left, int right) {
+
+        if (left > right) {
+            return null;
+        }
+
+        int val = preorder[preOrderIndex++];
+        TreeNode node = new TreeNode(val);
+        node.left = helper(preorder, left, map.get(val) - 1);
+        node.right = helper(preorder, map.get(val) + 1, right);
+        return node;
+    }
+
+    public TreeNode buildTree_1(int[] preorder, int[] inorder) {
         return helper(0, 0, inorder.length - 1, preorder, inorder);
     }
 
