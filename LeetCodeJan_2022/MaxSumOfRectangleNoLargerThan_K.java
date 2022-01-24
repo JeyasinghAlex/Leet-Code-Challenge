@@ -2,7 +2,7 @@ import java.util.TreeSet;
 
 public class MaxSumOfRectangleNoLargerThan_K {
 
-    public int maxSumSubmatrix(int[][] matrix, int k) {
+    public int maxSumSubMatrix(int[][] matrix, int k) {
         int row = matrix.length;
         int col = matrix[0].length;
         int max = Integer.MIN_VALUE;
@@ -20,18 +20,16 @@ public class MaxSumOfRectangleNoLargerThan_K {
 
     private int findMax(int[] nums, int k) {
         int max = Integer.MIN_VALUE;
-        int sum = 0;
-        TreeSet<Integer> s = new TreeSet();
+        TreeSet<Integer> s = new TreeSet<>();
         s.add(0);
-
+        int sum = 0;
         for(int i = 0;i < nums.length; i ++){
-            int t = sum + nums[i];
-            sum = t;
+            sum = sum + nums[i];
+
             Integer gap = s.ceiling(sum - k);
             if(gap != null) max = Math.max(max, sum - gap);
-            s.add(t);
+            s.add(sum);
         }
-
         return max;
     }
 }
