@@ -5,7 +5,7 @@ public class LongestCommonSubString {
         int n = text1.length();
         int m = text2.length();
 
-        int max = 1;
+        int max = 0;
         int[][] dp = new int[n + 1][m + 1];
         for (int i = 1; i <= n; ++i) {
             for (int j = 1; j <= m; ++j) {
