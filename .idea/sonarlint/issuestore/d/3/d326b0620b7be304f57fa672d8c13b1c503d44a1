@@ -1,7 +1,0 @@
-
-0
-java:S1220""Move this file to a named package.
-€
-java:S4144"^Update this method so that its implementation is not identical to "removeElement_1" on line 3.(àž‰‹üÿÿÿÿ8ýÓ·õŸ/
-i	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ô¨‰W8Î¯µõŸ/
-o	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(àž‰‹üÿÿÿÿ8êé·õŸ/
