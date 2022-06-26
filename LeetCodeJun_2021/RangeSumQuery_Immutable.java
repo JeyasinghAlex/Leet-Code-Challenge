@@ -1,8 +1,6 @@
 
 
 
-import jdk.internal.util.xml.impl.Pair;
-
 import java.util.HashMap;
 
 public class RangeSumQuery_Immutable {
