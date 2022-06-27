@@ -1,31 +1,30 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DFS_Graph {
 
-    public List<Integer> bfsOfGraph(int v, List<List<Integer>> adj) {
+    public List<Integer> dfsOfGraph(int v, List<List<Integer>> adj) {
 
         boolean[] visited = new boolean[v + 1];
-        List<Integer> bfs = new ArrayList<>();
-
+        List<Integer> dfs = new ArrayList<>();
         for (int i = 1; i <= v; ++i) {
-
             if (!visited[i]) {
-                Queue<Integer> qu = new LinkedList<>();
-                qu.add(i);
-                visited[i] = true;
-
-                while (!qu.isEmpty()) {
-                    int vertex = qu.poll();
-                    bfs.add(vertex);
-                    for (int num : adj.get(vertex)) {
-                        if (!visited[num]) {
-                            visited[num] = true;
-                            qu.add(num);
-                        }
-                    }
-                }
+                dfs(i, visited, adj, dfs);
             }
         }
-        return bfs;
+        return dfs;
+    }
+
+
+    private void dfs(int vertex, boolean[] visited, List<List<Integer>> adj, List<Integer> dfs) {
+
+        if (visited[vertex]) {
+            return;
+        }
+        visited[vertex] = true;
+        dfs.add(vertex);
+        for (int v : adj.get(vertex)) {
+            dfs(v, visited, adj, dfs);
+        }
     }
 }
