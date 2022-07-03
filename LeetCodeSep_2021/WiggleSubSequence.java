@@ -17,4 +17,26 @@ public class WiggleSubSequence {
         }
         return max;
     }
+
+    public int wiggleMaxLength_1(int[] nums) {
+
+        int n = nums.length;
+        int[] up = new int[n];
+        int[] down = new int[n];
+
+        for (int i = 1; i < n; ++i) {
+
+            if (nums[i] - nums[i - 1] > 0) {
+                up[i] = 1 + down[i - 1];
+                down[i] = down[i - 1];
+            } else if (nums[i] - nums[i - 1] < 0) {
+                down[i] = 1 + up[i - 1];
+                up[i] = up[i - 1];
+            } else {
+                down[i] = down[i - 1];
+                up[i] = up[i - 1];
+            }
+        }
+        return 1 + Math.max(up[n - 1], down[n - 1]);
+    }
 }
