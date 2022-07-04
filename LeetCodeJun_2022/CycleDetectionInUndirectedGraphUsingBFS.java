@@ -29,7 +29,7 @@ public class CycleDetectionInUndirectedGraphUsingBFS {
             for (int v : adj.get(curr)) {
                 if (!visited[v]) {
                     visited[v] = true;
-                    qu.offer(new int[]{v, parent});
+                    qu.offer(new int[]{v, curr});
                 } else if (v != parent) {
                     return true;
                 }
