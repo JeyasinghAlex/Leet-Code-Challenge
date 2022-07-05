@@ -1,11 +1,8 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class CourseSchedule_II {
 
-    public int[] findOrder(int numCourses, int[][] prerequisites) {
+    public int[] findOrder_1(int numCourses, int[][] prerequisites) {
 
         List<Integer>[] adj = new ArrayList[numCourses];
         boolean[] visited = new boolean[numCourses];
@@ -93,6 +90,65 @@ public class CourseSchedule_II {
                 return true;
             }
         }
+        dfsvisited[curr] = false;
+        return false;
+    }
+
+    public int[] findOrder(int n, int[][] prerequisites) {
+
+        List<Integer>[] adj = new ArrayList[n];
+        boolean[] visited = new boolean[n];
+        boolean[] dfsvisited = new boolean[n];
+
+        for (int i = 0; i < n; ++i) {
+            adj[i] = new ArrayList<>();
+        }
+
+        for (int[] edge : prerequisites) {
+            int u = edge[0];
+            int v = edge[1];
+            adj[v].add(u);
+        }
+
+
+        //Using Topological Sort
+        Stack<Integer> st = new Stack<>();
+        for (int i = 0; i < n; ++i) {
+            if (!visited[i]) {
+                boolean flag = isCycle(i, visited, dfsvisited, adj, st);
+                if (flag) {
+                    return new int[]{};
+                }
+            }
+        }
+
+        int[] ans = new int[n];
+        int idx = 0;
+        while(!st.isEmpty()) {
+            ans[idx++] = st.pop();
+        }
+        return ans;
+    }
+
+
+
+    private boolean isCycle(int curr, boolean[] visited, boolean[] dfsvisited, List<Integer>[] adj, Stack<Integer> st) {
+
+        visited[curr] = true;
+        dfsvisited[curr] = true;
+
+        for (int v : adj[curr]) {
+
+            if (!visited[v]) {
+                if (isCycle(v, visited, dfsvisited, adj, st)) {
+                    return true;
+                }
+            } else if (dfsvisited[v]) {
+                return true;
+            }
+        }
+
+        st.push(curr);
         dfsvisited[curr] = false;
         return false;
     }
