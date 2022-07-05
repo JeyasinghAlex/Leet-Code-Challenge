@@ -1,10 +1,49 @@
-package LeetCodeJun_2021;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LongestConsecutiveSequence {
 
     public int longestConsecutive(int[] nums) {
+
+        int n = nums.length;
+
+        if (n == 0) {
+            return 0;
+        }
+
+        Set<Integer> set = new HashSet<>();
+
+        for (int num : nums) {
+            set.add(num);
+        }
+
+        int max = 1;
+        int ans = 0;
+        for (int num : nums) {
+
+            int prev = num - 1;
+            int next = num + 1;
+
+            while (set.contains(prev)) {
+                ++max;
+                set.remove(prev--);
+            }
+
+            while (set.contains(next)) {
+                ++max;
+                set.remove(next++);
+            }
+
+            ans = Math.max(max, ans);
+            max = 1;
+
+        }
+        return ans;
+    }
+
+    public int longestConsecutive_1(int[] nums) {
 
         if (nums.length == 0){
             return 0;
