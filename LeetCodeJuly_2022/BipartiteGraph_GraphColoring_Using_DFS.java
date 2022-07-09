@@ -23,7 +23,7 @@ public class BipartiteGraph_GraphColoring_Using_DFS {
 
         for (int i = 1; i <= n; ++i) {
             if (color[i] == -1) {
-                boolean flag = bfs(i, color, adj);
+                boolean flag = dfs(i, color, adj);
                 if (!flag) {
                     return false;
                 }
@@ -32,22 +32,22 @@ public class BipartiteGraph_GraphColoring_Using_DFS {
         return true;
     }
 
-    private boolean bfs(int curr, int[] color, List<Integer>[] adj) {
 
-        Queue<Integer> qu = new LinkedList<>();
-        qu.offer(curr);
-        color[curr] = 0;
+    private boolean dfs(int curr, int[] color, List<Integer>[] adj) {
 
-        while (!qu.isEmpty()) {
+        if (color[curr] == -1) {
+            color[curr] = 1;
+        }
 
-            curr = qu.poll();
-            for (int v : adj[curr]) {
-                if (color[v] == -1) {
-                    color[v] = 1 - color[curr];
-                    qu.offer(v);
-                } else if (color[curr] == color[v]) {
+        for (int v : adj[curr]) {
+            if (color[v] == -1) {
+                color[v] = 1 - color[curr];
+                boolean flag = dfs(v, color, adj);
+                if (!flag) {
                     return false;
                 }
+            } else if (color[curr] == color[v]) {
+                return false;
             }
         }
         return true;
