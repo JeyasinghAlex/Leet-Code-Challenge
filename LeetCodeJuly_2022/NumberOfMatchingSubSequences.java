@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class NumberOfMatchingSubSequences {
 
     public int numMatchingSubseq(String s, String[] words) {
