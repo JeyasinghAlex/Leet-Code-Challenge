@@ -32,6 +32,7 @@ public class MinimumSpanningTree_KruskalAlgorithm {
         for (int[] edge : mst) {
             System.out.println(edge[0] + " - " + edge[1]);
         }
+        System.out.println(cost);
     }
 
     private int find(int u, int[] parent) {
