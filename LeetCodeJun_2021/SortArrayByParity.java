@@ -6,6 +6,24 @@ public class SortArrayByParity {
         int j = nums.length - 1;
         while (i < j) {
 
+            if (nums[i] % 2 != 0) {
+                int temp = nums[j];
+                nums[j] = nums[i];
+                nums[i] = temp;
+                --j;
+            } else {
+                ++i;
+            }
+        }
+        return nums;
+    }
+
+    public int[] sortArrayByParity_1(int[] nums) {
+
+        int i = 0;
+        int j = nums.length - 1;
+        while (i < j) {
+
             if (nums[i] % 2 == 1 && nums[j] % 2 == 0) {
                 int temp = nums[i];
                 nums[i] = nums[j];
@@ -22,7 +40,7 @@ public class SortArrayByParity {
         return nums;
     }
 
-    public int[] sortArrayByParity_1(int[] nums) {
+    public int[] sortArrayByParity_2(int[] nums) {
         int[] res = new int[nums.length];
         int i = 0;
         int j = nums.length - 1;
