@@ -1,5 +1,18 @@
 public class MissingNumber {
 
+    public int missingNumber_bit(int[] nums) {
+
+        int total = 0;
+        for (int i = 0; i <= nums.length; ++i) {
+            total = total ^ i;
+        }
+
+        for (int i = 0; i < nums.length; ++i) {
+            total = total ^ nums[i];
+        }
+
+        return total;
+    }
     public int missingNumber(int[] nums) {
 
         int total = nums.length;
