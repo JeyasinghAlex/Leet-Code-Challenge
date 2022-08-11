@@ -1,3 +1,7 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class BinaryTreesWithFactors {
 
     public int numFactoredBinaryTrees(int[] arr) {
