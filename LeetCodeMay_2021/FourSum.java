@@ -4,22 +4,31 @@ public class FourSum {
 
     public List<List<Integer>> fourSum(int[] nums, int target) {
 
-        Set<List<Integer>> ans = new HashSet<>();
-        mergeSort(nums);
-        for (int i = 0; i < nums.length; ++i) {
+        int n = nums.length;
 
-            for (int j = i + 1; j < nums.length; ++j) {
+        Set<List<Integer>> ans = new HashSet<>();
+
+        mergeSort(nums);
+
+        for (int i = 0; i < n; ++i) {
+            for (int j = i + 1; j < n; ++j) {
 
                 int lo = j + 1;
-                int hi = nums.length - 1;
+                int hi = n - 1;
+
                 while (lo < hi) {
 
-                    int sum = nums[i] + nums[j] + nums[lo] + nums[hi];
-                    if (sum == target) {
+                    if (hi != n - 1 && nums[hi] == nums[hi + 1]) {
+                        --hi;
+                        continue;
+                    }
+
+                    long sum = (long) nums[i] + nums[j] + nums[lo] + nums[hi];
+                    if(sum == target) {
                         ans.add(Arrays.asList(nums[i], nums[j], nums[lo], nums[hi]));
                         ++lo;
                         --hi;
-                    } else if (sum < target) {
+                    } else if (target > sum) {
                         ++lo;
                     } else {
                         --hi;
@@ -27,7 +36,7 @@ public class FourSum {
                 }
             }
         }
-        return new ArrayList(ans);
+        return new ArrayList<>(ans);
     }
 
     private void sort(int[] nums) {
