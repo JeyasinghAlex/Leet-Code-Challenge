@@ -1,8 +1,39 @@
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class MinimumNumberOfRefuelingStops {
 
-    public int minRefuelStops(int target, int tank, int[][] stations) {
+    public int minRefuelStops(int target, int startFuel, int[][] stations) {
+
+        if (startFuel >= target) {
+            return 0;
+        }
+
+        int n = stations.length;
+
+        Queue<Integer> qu = new PriorityQueue<>((a, b) -> b - a);
+
+        int i = 0;
+        int maxDis = startFuel;
+        int stop = 0;
+
+        while (maxDis < target) {
+
+            while (i < n && stations[i][0] <= maxDis) {
+                qu.offer(stations[i++][1]);
+            }
+
+            if (qu.isEmpty()) {
+                return -1;
+            }
+
+            maxDis += qu.poll();
+            stop++;
+        }
+        return stop;
+    }
+
+    public int minRefuelStops_1(int target, int tank, int[][] stations) {
 
         PriorityQueue<Integer> qu = new PriorityQueue<>((a, b) -> b - a);
 
