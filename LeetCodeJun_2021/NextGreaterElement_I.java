@@ -1,9 +1,33 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
 public class NextGreaterElement_I {
 
+
+    public int[] nextGreater(int[] arr, int n) {
+
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+        Stack<Integer> st = new Stack<>();
+
+        for (int i = 0; i < n; ++i) {
+
+            while (!st.isEmpty() && arr[st.peek()] < arr[i]) {
+                ans[st.pop()] = arr[i];
+            }
+            st.push(i);
+        }
+        return ans;
+    }
+
+    /**
+     * This method is worked on number distinct in array.
+     * @param nums1
+     * @param nums2
+     * @return
+     */
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
 
         int m = nums1.length;
