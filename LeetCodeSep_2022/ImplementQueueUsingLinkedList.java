@@ -1,4 +1,4 @@
-public class ImplementQueue {
+public class ImplementQueueUsingLinkedList {
 
     class Node {
 
@@ -10,7 +10,7 @@ public class ImplementQueue {
         }
     }
 
-    ImplementQueue() {
+    ImplementQueueUsingLinkedList() {
         // Implement the Constructor
     }
 
