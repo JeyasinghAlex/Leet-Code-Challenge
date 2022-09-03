@@ -10,7 +10,7 @@ public class ImplementQueue {
         }
     }
 
-    Queue() {
+    ImplementQueue() {
         // Implement the Constructor
     }
 
