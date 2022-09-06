@@ -3,12 +3,15 @@ import java.util.Queue;
 
 public class KthLargestElementInAnArray {
 
+    class QuickSelectAlgorithm {
+
+    }
+
     public static void main(String[] args) {
         int[] arr = {3, 2, 3, 1, 2, 4, 5, 5, 6};
         int k = 5;
         System.out.println(new KthLargestElementInAnArray().findKthLargest(arr, k));
     }
-
     public int findKthLargest(int[] nums, int k) {
 
         int start = 0;
