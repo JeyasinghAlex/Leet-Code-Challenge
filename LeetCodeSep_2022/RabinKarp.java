@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class RabinCarp {
+public class RabinKarp {
 
 
     public static List<Integer> stringMatch_1(String str, String pat) {
