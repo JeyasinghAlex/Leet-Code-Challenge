@@ -1,6 +1,35 @@
 public class CountAndSay {
 
-    public static String countAndSay(int n) {
+    public String countAndSay(int n) {
+
+        String s = "1";
+
+        for (int i = 1; i < n; ++i) {
+            s = count(s);
+        }
+        return s;
+    }
+
+    private String count(String s) {
+
+        int n = s.length();
+        int i = 0;
+        StringBuilder sb = new StringBuilder();
+
+        while (i < n) {
+
+            int count = 1;
+            while (i < n - 1 && s.charAt(i) == s.charAt(i + 1)) {
+                ++count;
+                ++i;
+            }
+            sb.append(count).append(s.charAt(i));
+            ++i;
+        }
+        return sb.toString();
+    }
+
+    public static String countAndSay_1(int n) {
 
         int i = 1;
         if (n <= 1) {
