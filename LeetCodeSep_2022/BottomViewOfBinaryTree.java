@@ -14,7 +14,7 @@ public class BottomViewOfBinaryTree {
 
         Queue<Node> qu = new LinkedList<>();
 
-        Map<Integer, Integer> map = new TreeMap<>();
+        Map<Integer, Integer> lineVsValue = new TreeMap<>();
         List<Integer> ans = new ArrayList<>();
 
         if (root == null) {
@@ -44,11 +44,11 @@ public class BottomViewOfBinaryTree {
                     right.line = line + 1;
                     qu.offer(right);
                 }
-                map.put(line, data);
+                lineVsValue.put(line, data);
             }
         }
 
-        for (int n : map.values()) {
+        for (int n : lineVsValue.values()) {
             ans.add(n);
         }
         return ans;
