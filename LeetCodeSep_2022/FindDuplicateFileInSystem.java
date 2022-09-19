@@ -7,23 +7,31 @@ public class FindDuplicateFileInSystem {
 
     public List<List<String>> findDuplicate(String[] paths) {
 
-        Map< String, List < String >> map = new HashMap< >();
-        for (String path: paths) {
+        Map<String, List<String>> map = new HashMap<>();
+
+        for (String path : paths) {
+
             String[] values = path.split(" ");
-            for (int i = 1; i < values.length; i++) {
-                String[] name_cont = values[i].split("\\(");
-                name_cont[1] = name_cont[1].replace(")", "");
-                List < String > list = map.getOrDefault(name_cont[1], new ArrayList< String >());
-                list.add(values[0] + "/" + name_cont[0]);
-                map.put(name_cont[1], list);
+
+            for (int i = 1; i < values.length; ++i) {
+                String[] fileAndContent = values[i].split("\\(");
+
+                String file = fileAndContent[0];
+                String content = fileAndContent[1].replace(")","");
+
+                map.putIfAbsent(content, new ArrayList<>());
+
+                String filePath = values[0] + "/" + file;
+                map.get(content).add(filePath);
             }
         }
 
-        List < List < String >> res = new ArrayList < > ();
-        for (String key: map.keySet()) {
-            if (map.get(key).size() > 1)
-                res.add(map.get(key));
+        List<List<String>> ans = new ArrayList<>();
+        for (List<String> list : map.values()) {
+            if (list.size() > 1) {
+                ans.add(list);
+            }
         }
-        return res;
+        return ans;
     }
 }
