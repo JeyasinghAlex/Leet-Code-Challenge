@@ -1,7 +1,9 @@
+import java.util.TreeMap;
+
 public class MyCalendar_III {
 
     private TreeMap<Integer, Integer> treeMap;
-    public MyCalendarThree() {
+    public MyCalendar_III() {
         this.treeMap = new TreeMap<>();
     }
 
