@@ -1,71 +1,65 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class LRUCache {
+class LRUCache {
 
-    class Node {
-        Node prev;
-        Node next;
+    static class Node {
+
         int key;
-        int val;
-        public Node(int key, int val) {
+        int value;
+        Node next;
+        Node prev;
+
+        Node(int key, int value) {
             this.key = key;
-            this.val = val;
+            this.value = value;
         }
     }
 
-    Map<Integer, Node> map = new HashMap<>();
-    Node head = new Node(-1, -1);
-    Node tail = new Node(-1, -1);
+    Node head = new Node(0, 0);
+    Node tail = new Node(0, 0);
+    Map<Integer, Node> map;
     int capacity;
 
     public LRUCache(int capacity) {
-        join(head, tail);
+        this.map = new HashMap<>();
         this.capacity = capacity;
+        head.next = tail;
+        tail.prev = head;
     }
 
     public int get(int key) {
         if (!map.containsKey(key)) {
             return -1;
         }
+
         Node node = map.get(key);
         remove(node);
-        moveToHead(node);
-        return node.val;
+        insert(node);
+        return node.value;
     }
 
     public void put(int key, int value) {
         if (map.containsKey(key)) {
-            Node node = map.get(key);
-            node.val = value;
-            remove(node);
-            moveToHead(node);
-        } else {
-            if (map.size() == capacity) {
-                if (tail.prev != head) {
-                    map.remove(tail.prev.key);
-                    remove(tail.prev);
-                }
-            }
-            Node node = new Node(key, value);
-            moveToHead(node);
-            map.put(key, node);
+            remove(map.get(key));
         }
+        if (map.size() == capacity) {
+            remove(tail.prev);
+        }
+        insert(new Node(key, value));
     }
 
-    public void join(Node n1, Node n2) {
-        n1.next = n2;
-        n2.prev = n1;
-    }
-
-    public void remove(Node node) {
+    private void remove(Node node) {
+        map.remove(node.key);
         node.prev.next = node.next;
         node.next.prev = node.prev;
     }
 
-    public void moveToHead(Node node) {
-        Node next = head.next;
-        join(head, node);
-        join(node, next);
+    private void insert(Node node) {
+        map.put(node.key, node);
+        node.next = head.next;
+        node.next.prev = node;
+        head.next = node;
+        node.prev = head;
     }
 }
