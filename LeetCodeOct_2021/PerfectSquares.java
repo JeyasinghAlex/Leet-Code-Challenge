@@ -1,6 +1,6 @@
 public class PerfectSquares {
 
-    public int numSquares(int n) {
+    public int numSquares_dp(int n) {
 
         if (n <= 3) {
             return n;
@@ -17,5 +17,30 @@ public class PerfectSquares {
             }
         }
         return dp[n];
+    }
+
+    public int numSquares_memo(int n) {
+
+        int[] memo = new int[n + 1];
+        return memoization(n, memo);
+    }
+
+    private int memoization(int n, int[] memo) {
+
+        if (n <= 3) {
+            return n;
+        }
+
+        if (memo[n] != 0) {
+            return memo[n];
+        }
+
+        int ans = n;
+        for (int i = 1; i * i <= n; ++i) {
+            int sq = i * i;
+            ans = Math.min(ans, 1 + memoization(n - sq, memo));
+        }
+        memo[n] = ans;
+        return ans;
     }
 }
