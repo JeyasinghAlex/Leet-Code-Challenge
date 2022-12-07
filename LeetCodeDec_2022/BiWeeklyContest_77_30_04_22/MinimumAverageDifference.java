@@ -1,3 +1,5 @@
+package BiWeeklyContest_77_30_04_22;
+
 public class MinimumAverageDifference {
 
     public int minimumAverageDifference(int[] nums) {
