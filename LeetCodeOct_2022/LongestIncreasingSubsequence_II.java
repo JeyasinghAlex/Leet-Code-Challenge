@@ -33,7 +33,7 @@ public class LongestIncreasingSubsequence_II {
         return res;
     }
 
-    public int lengthOfLIS(int[] A, int k) {
+    public int lengthOfLIS_Segment_Tree(int[] A, int k) {
         int ans = 0;
         for (int i = 0; i < A.length; ++i){
             int l = Math.max(0, A[i]-k);
