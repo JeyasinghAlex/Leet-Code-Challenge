@@ -1,4 +1,4 @@
-package WeeklyContest_08_01_23;
+package WeeklyContest_327_08_01_23;
 
 import java.util.PriorityQueue;
 
