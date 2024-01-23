@@ -21,6 +21,16 @@ public class KokoEatingBananas {
 
 
     private boolean caneat(int[] piles, int h, int k) {
+
+        /*for (int pile : piles) {
+            h -= pile / k;
+            int rem = pile % k;
+            if (rem > 0) {
+                --h;
+            }
+        }
+        return h >= 0;*/
+
         for (int pile : piles) {
             h -= (1 + (pile - 1) / k);
         }
