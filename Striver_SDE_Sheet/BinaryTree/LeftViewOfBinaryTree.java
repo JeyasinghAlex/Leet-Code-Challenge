@@ -19,11 +19,11 @@ public class LeftViewOfBinaryTree {
         List<Integer> leftView(Node root) {
         List<Integer> list = new ArrayList<>();
         Queue<Node> qu = new LinkedList<>();
-        dfs(root, list, qu);
+        bfs(root, list, qu);
         return list;
     }
 
-    private void dfs(Node node, List<Integer> list, Queue<Node> qu) {
+    private void bfs(Node node, List<Integer> list, Queue<Node> qu) {
 
         if (node == null)
             return;
