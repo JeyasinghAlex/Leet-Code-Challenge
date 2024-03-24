@@ -2,6 +2,46 @@ import java.util.*;
 
 public class TheSkylineProblem {
 
+
+    public List<List<Integer>> getSkyline(int[][] buildings) {
+
+        List<List<Integer>> ans = new ArrayList<>();
+        List<int[]> heights = new ArrayList<>();
+
+        for (int[] b : buildings) {
+            heights.add(new int[]{b[0], -b[2]});
+            heights.add(new int[]{b[1], b[2]});
+        }
+
+        Collections.sort(heights, (a, b) -> {
+            if (a[0] != b[0]) {
+                return a[0] - b[0];
+            }
+            return a[1] - b[1];
+        });
+
+        Queue<Integer> qu = new PriorityQueue<>((a, b) -> b - a);
+        qu.offer(0);
+        int prev = 0;
+
+        for (int[] h : heights) {
+
+            if (h[1] < 0) {
+                qu.offer(-h[1]);
+            }
+            else {
+                qu.remove(h[1]);
+            }
+            int curr = qu.peek();
+            if (prev != curr) {
+                ans.add(Arrays.asList(h[0], curr));
+                prev = curr;
+            }
+        }
+        return ans;
+    }
+
+
     private class Node {
         private int x, y;
         private boolean isStart;
@@ -13,7 +53,7 @@ public class TheSkylineProblem {
         }
     }
 
-    public List<List<Integer>> getSkyline(int[][] buildings) {
+    public List<List<Integer>> getSkyline_1(int[][] buildings) {
         List<Node> buildingDetails = new ArrayList<>(buildings.length * 2);
         for (int[] buildingPlan : buildings) {
             int start = buildingPlan[0], end = buildingPlan[1], height = buildingPlan[2];
