@@ -1,5 +1,64 @@
 public class TargetSum {
 
+
+    public int findTargetSumWays(int[] nums, int target) {
+        
+        int n = nums.length;
+        int sum = 0;
+        for (int i = 0; i < n; ++i) {
+            sum += nums[i];
+        }
+
+        return memo(0, 0, target, nums);
+    }
+
+    private int memo(int index, int sum, int target, int[] nums) {
+
+        if (index == nums.length) {
+            if (sum == target) {
+                return 1;
+            }
+            return 0;
+        }
+
+        
+        int pos = memo(index + 1, sum + nums[index], target, nums);
+        int neg = memo(index + 1, sum - nums[index], target, nums);
+        return pos + neg;
+    }
+
+    
+    public int findTargetSumWays(int[] nums, int target) {
+        
+        int n = nums.length;
+        int sum = 0;
+        for (int i = 0; i < n; ++i) {
+            sum += nums[i];
+        }
+
+        Integer[][] dp = new Integer[n + 1][sum + 1001];
+
+        return memo(0, 0, target, nums, dp);
+    }
+
+    private int memo(int index, int sum, int target, int[] nums, Integer[][] dp) {
+
+        if (index == nums.length) {
+            if (sum == target) {
+                return 1;
+            }
+            return 0;
+        }
+
+        if (dp[index][sum + 1000] != null) {
+            return dp[index][sum + 1000];
+        }
+        int pos = memo(index + 1, sum + nums[index], target, nums, dp);
+        int neg = memo(index + 1, sum - nums[index], target, nums, dp);
+        dp[index][sum + 1000] = pos + neg;
+        return dp[index][sum + 1000];
+    }
+
     public int findTargetSumWays(int[] nums, int target) {
 
         int n = nums.length;
