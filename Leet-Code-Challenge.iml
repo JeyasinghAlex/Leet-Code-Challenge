@@ -16,8 +16,19 @@
       <sourceFolder url="file://$MODULE_DIR$/LeetCodeNov_2021" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/LeetCodeOct_2021" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/LeetCodeSep_2021" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LeetCodeJuly_2022" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LeetCodeMay_2021" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LeetCodeAug_2022" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LeetCodeSep_2022" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LeetCodeOct_2022" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LeetCodeNov_2022" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LeetCodeDec_2022" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LeetCodeJan_2023" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LeetCodeFeb_2023" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Striver_SDE_Sheet" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="json-20220320" level="project" />
   </component>
 </module>
