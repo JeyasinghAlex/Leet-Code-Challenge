@@ -3,7 +3,7 @@ package InterviewQuestions.InventoryClearanceSale;
 /**
  * PayPal
  */
-public class Product {
+public class Product implements IProduct{
 
         private String productId;
         private int salesVelocity;
